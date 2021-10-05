@@ -196,7 +196,6 @@ if (sliders) {
 	}
 	sliders_bild_callback();
 }
-
 function sliders_bild_callback(params) { }
 
 let sliderScrollItems = document.querySelectorAll('._swiper_scroll');
@@ -205,6 +204,8 @@ if (sliderScrollItems.length > 0) {
 		const sliderScrollItem = sliderScrollItems[index];
 		const sliderScrollBar = sliderScrollItem.querySelector('.swiper-scrollbar');
 		const sliderScroll = new Swiper(sliderScrollItem, {
+			observer: true,
+			observeParents: true,
 			direction: 'vertical',
 			slidesPerView: 'auto',
 			freeMode: true,
@@ -224,67 +225,94 @@ if (sliderScrollItems.length > 0) {
 
 function sliders_bild_callback(params) { }
 
-let sliderSlider = new Swiper('.slider', {
-	/*
-	effect: 'fade',
-	autoplay: {
-		delay: 3000,
-		disableOnInteraction: false,
-	},
-	*/
-	observer: true,
-	observeParents: true,
-	slidesPerView: 1,
-	spaceBetween: 0,
-	autoHeight: true,
-	speed: 800,
-	//touchRatio: 0,
-	//simulateTouch: false,
-	//loop: true,
-	//preloadImages: false,
-	//lazy: true,
-	// Dotts
-	//pagination: {
-	//	el: '.slider-quality__pagging',
-	//	clickable: true,
-	//},
-	// Arrows
-	navigation: {
-		nextEl: '.about__more .more__item_next',
-		prevEl: '.about__more .more__item_prev',
-	},
-	/*
-	breakpoints: {
-		320: {
-			slidesPerView: 1,
-			spaceBetween: 0,
-			autoHeight: true,
+if (document.querySelector('.slider-main__body')) {
+	new Swiper('.slider-main__body', {
+		observer: true,
+		observeParents: true,
+		slidesPerView: 1,
+		spaceBetween: 32,
+		watchOverflow: true,
+		speed: 800,
+		loop: true,
+		loopAdditionalSlides: 5,
+		preloadImages: false,
+		parallax: true,
+		// Dotts
+		pagination: {
+			el: '.controls-slider-main__dotts',
+			clickable: true,
 		},
-		768: {
-			slidesPerView: 2,
-			spaceBetween: 20,
-		},
-		992: {
-			slidesPerView: 3,
-			spaceBetween: 20,
-		},
-		1268: {
-			slidesPerView: 4,
-			spaceBetween: 30,
-		},
-	},
-	*/
-	on: {
-		lazyImageReady: function () {
-			ibg();
-		},
-	}
-	// And if we need scrollbar
-	//scrollbar: {
-	//	el: '.swiper-scrollbar',
-	//},
-});
+		// Arrows
+		navigation: {
+			nextEl: '.slider-main .slider-arrow_next',
+			prevEl: '.slider-main .slider-arrow_prev',
+		}
+	});
+}
 
+if (document.querySelector('.slider-rooms__body')) {
+	new Swiper('.slider-rooms__body', {
+		observer: true,
+		observeParents: true,
+		slidesPerView: 'auto',
+		spaceBetween: 24,
+		speed: 800,
+		loop: true,
+		watchOverflow: true,
+		loopAdditionalSlides: 5,
+		preloadImages: false,
+		parallax: true,
+		// Dotts
+		pagination: {
+			el: '.slider-rooms__dotts',
+			clickable: true,
+		},
+		// Arrows
+		navigation: {
+			nextEl: '.slider-rooms .slider-arrow_next',
+			prevEl: '.slider-rooms .slider-arrow_prev',
+		}
+	});
+}
+
+if (document.querySelector('.slider-tips__body')) {
+	new Swiper('.slider-tips__body', {
+		observer: true,
+		observeParents: true,
+		slidesPerView: 3,
+		spaceBetween: 32,
+		speed: 800,
+		loop: true,
+		watchOverflow: true,
+		// Dotts
+		pagination: {
+			el: '.slider-tips__dotts',
+			clickable: true,
+		},
+		// Arrows
+		navigation: {
+			nextEl: '.slider-tips .slider-arrow_next',
+			prevEl: '.slider-tips .slider-arrow_prev',
+		},
+		breakpoints: {
+			// when window width is >= 320px
+			320: {
+				slidesPerView: 1.1,
+				spaceBetween: 15
+			},
+			// when window width is >= 768px
+			768: {
+				slidesPerView: 2,
+				spaceBetween: 20
+			},
+			// when window width is >= 992px
+			992: {
+				slidesPerView: 3,
+				spaceBetween: 32
+			}
+		}
+	})
+}
 var ua = window.navigator.userAgent;
 var msie = ua.indexOf("MSIE ");
 var isMobile = { Android: function () { return navigator.userAgent.match(/Android/i); }, BlackBerry: function () { return navigator.userAgent.match(/BlackBerry/i); }, iOS: function () { return navigator.userAgent.match(/iPhone|iPad|iPod/i); }, Opera: function () { return navigator.userAgent.match(/Opera Mini/i); }, Windows: function () { return navigator.userAgent.match(/IEMobile/i); }, any: function () { return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows()); } };
@@ -294,11 +322,12 @@ function isIE() {
 	return is_ie;
 }
 if (isIE()) {
-	document.querySelector('body').classList.add('ie');
+	document.querySelector('html').classList.add('ie');
 }
 if (isMobile.any()) {
-	document.querySelector('body').classList.add('_touch');
+	document.querySelector('html').classList.add('_touch');
 }
+
 function testWebP(callback) {
 	var webP = new Image();
 	webP.onload = webP.onerror = function () {
@@ -307,12 +336,13 @@ function testWebP(callback) {
 	webP.src = "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA";
 }
 testWebP(function (support) {
-	if (support == true) {
-		document.querySelector('body').classList.add('_webp');
+	if (support === true) {
+		document.querySelector('html').classList.add('_webp');
 	} else {
-		document.querySelector('body').classList.add('_no-webp');
+		document.querySelector('html').classList.add('_no-webp');
 	}
 });
+
 function ibg() {
 	if (isIE()) {
 		let ibg = document.querySelectorAll("._ibg");
@@ -325,9 +355,13 @@ function ibg() {
 }
 ibg();
 
-if (document.querySelector('.wrapper')) {
-	document.querySelector('.wrapper').classList.add('_loaded');
-}
+window.addEventListener("load", function () {
+	if (document.querySelector('.wrapper')) {
+		setTimeout(function () {
+			document.querySelector('.wrapper').classList.add('_loaded');
+		}, 0);
+	}
+});
 
 let unlock = true;
 
@@ -408,7 +442,6 @@ function body_lock_add(delay) {
 	}
 }
 //=================
-
 // LettersAnimation
 let title = document.querySelectorAll('._letter-animation');
 if (title) {
@@ -455,39 +488,130 @@ for (let index = 0; index < tabs.length; index++) {
 	}
 }
 //=================
-//Spollers
-let spollers = document.querySelectorAll("._spoller");
-let spollersGo = true;
-if (spollers.length > 0) {
-	for (let index = 0; index < spollers.length; index++) {
-		const spoller = spollers[index];
-		spoller.addEventListener("click", function (e) {
-			if (spollersGo) {
-				spollersGo = false;
-				if (spoller.classList.contains('_spoller-992') && window.innerWidth > 992) {
-					return false;
-				}
-				if (spoller.classList.contains('_spoller-768') && window.innerWidth > 768) {
-					return false;
-				}
-				if (spoller.closest('._spollers').classList.contains('_one')) {
-					let curent_spollers = spoller.closest('._spollers').querySelectorAll('._spoller');
-					for (let i = 0; i < curent_spollers.length; i++) {
-						let el = curent_spollers[i];
-						if (el != spoller) {
-							el.classList.remove('_active');
-							_slideUp(el.nextElementSibling);
-						}
-					}
-				}
-				spoller.classList.toggle('_active');
-				_slideToggle(spoller.nextElementSibling);
+/*
+Для родителя слойлеров пишем атрибут data-spollers
+Для заголовков слойлеров пишем атрибут data-spoller
+Если нужно включать\выключать работу спойлеров на разных размерах экранов
+пишем параметры ширины и типа брейкпоинта.
+Например: 
+data-spollers="992,max" - спойлеры будут работать только на экранах меньше или равно 992px
+data-spollers="768,min" - спойлеры будут работать только на экранах больше или равно 768px
 
-				setTimeout(function () {
-					spollersGo = true;
-				}, 500);
+Если нужно что бы в блоке открывался болько один слойлер добавляем атрибут data-one-spoller
+*/
+
+// SPOLLERS
+const spollersArray = document.querySelectorAll('[data-spollers]');
+if (spollersArray.length > 0) {
+	// Получение обычных слойлеров
+	const spollersRegular = Array.from(spollersArray).filter(function (item, index, self) {
+		return !item.dataset.spollers.split(",")[0];
+	});
+	// Инициализация обычных слойлеров
+	if (spollersRegular.length > 0) {
+		initSpollers(spollersRegular);
+	}
+
+	// Получение слойлеров с медиа запросами
+	const spollersMedia = Array.from(spollersArray).filter(function (item, index, self) {
+		return item.dataset.spollers.split(",")[0];
+	});
+
+	// Инициализация слойлеров с медиа запросами
+	if (spollersMedia.length > 0) {
+		const breakpointsArray = [];
+		spollersMedia.forEach(item => {
+			const params = item.dataset.spollers;
+			const breakpoint = {};
+			const paramsArray = params.split(",");
+			breakpoint.value = paramsArray[0];
+			breakpoint.type = paramsArray[1] ? paramsArray[1].trim() : "max";
+			breakpoint.item = item;
+			breakpointsArray.push(breakpoint);
+		});
+
+		// Получаем уникальные брейкпоинты
+		let mediaQueries = breakpointsArray.map(function (item) {
+			return '(' + item.type + "-width: " + item.value + "px)," + item.value + ',' + item.type;
+		});
+		mediaQueries = mediaQueries.filter(function (item, index, self) {
+			return self.indexOf(item) === index;
+		});
+
+		// Работаем с каждым брейкпоинтом
+		mediaQueries.forEach(breakpoint => {
+			const paramsArray = breakpoint.split(",");
+			const mediaBreakpoint = paramsArray[1];
+			const mediaType = paramsArray[2];
+			const matchMedia = window.matchMedia(paramsArray[0]);
+
+			// Объекты с нужными условиями
+			const spollersArray = breakpointsArray.filter(function (item) {
+				if (item.value === mediaBreakpoint && item.type === mediaType) {
+					return true;
+				}
+			});
+			// Событие
+			matchMedia.addListener(function () {
+				initSpollers(spollersArray, matchMedia);
+			});
+			initSpollers(spollersArray, matchMedia);
+		});
+	}
+	// Инициализация
+	function initSpollers(spollersArray, matchMedia = false) {
+		spollersArray.forEach(spollersBlock => {
+			spollersBlock = matchMedia ? spollersBlock.item : spollersBlock;
+			if (matchMedia.matches || !matchMedia) {
+				spollersBlock.classList.add('_init');
+				initSpollerBody(spollersBlock);
+				spollersBlock.addEventListener("click", setSpollerAction);
+			} else {
+				spollersBlock.classList.remove('_init');
+				initSpollerBody(spollersBlock, false);
+				spollersBlock.removeEventListener("click", setSpollerAction);
 			}
 		});
+	}
+	// Работа с контентом
+	function initSpollerBody(spollersBlock, hideSpollerBody = true) {
+		const spollerTitles = spollersBlock.querySelectorAll('[data-spoller]');
+		if (spollerTitles.length > 0) {
+			spollerTitles.forEach(spollerTitle => {
+				if (hideSpollerBody) {
+					spollerTitle.removeAttribute('tabindex');
+					if (!spollerTitle.classList.contains('_active')) {
+						spollerTitle.nextElementSibling.hidden = true;
+					}
+				} else {
+					spollerTitle.setAttribute('tabindex', '-1');
+					spollerTitle.nextElementSibling.hidden = false;
+				}
+			});
+		}
+	}
+	function setSpollerAction(e) {
+		const el = e.target;
+		if (el.hasAttribute('data-spoller') || el.closest('[data-spoller]')) {
+			const spollerTitle = el.hasAttribute('data-spoller') ? el : el.closest('[data-spoller]');
+			const spollersBlock = spollerTitle.closest('[data-spollers]');
+			const oneSpoller = spollersBlock.hasAttribute('data-one-spoller') ? true : false;
+			if (!spollersBlock.querySelectorAll('._slide').length) {
+				if (oneSpoller && !spollerTitle.classList.contains('_active')) {
+					hideSpollersBody(spollersBlock);
+				}
+				spollerTitle.classList.toggle('_active');
+				_slideToggle(spollerTitle.nextElementSibling, 500);
+			}
+			e.preventDefault();
+		}
+	}
+	function hideSpollersBody(spollersBlock) {
+		const spollerActiveTitle = spollersBlock.querySelector('[data-spoller]._active');
+		if (spollerActiveTitle) {
+			spollerActiveTitle.classList.remove('_active');
+			_slideUp(spollerActiveTitle.nextElementSibling, 500);
+		}
 	}
 }
 //=================
@@ -653,70 +777,71 @@ document.addEventListener('keydown', function (e) {
 		popup_close();
 	}
 });
+
 //=================
 //SlideToggle
 let _slideUp = (target, duration = 500) => {
-	target.style.transitionProperty = 'height, margin, padding';
-	target.style.transitionDuration = duration + 'ms';
-	target.style.height = target.offsetHeight + 'px';
-	target.offsetHeight;
-	target.style.overflow = 'hidden';
-	target.style.height = 0;
-	target.style.paddingTop = 0;
-	target.style.paddingBottom = 0;
-	target.style.marginTop = 0;
-	target.style.marginBottom = 0;
-	window.setTimeout(() => {
-		target.style.display = 'none';
-		target.style.removeProperty('height');
+	if (!target.classList.contains('_slide')) {
+		target.classList.add('_slide');
+		target.style.transitionProperty = 'height, margin, padding';
+		target.style.transitionDuration = duration + 'ms';
+		target.style.height = target.offsetHeight + 'px';
+		target.offsetHeight;
+		target.style.overflow = 'hidden';
+		target.style.height = 0;
+		target.style.paddingTop = 0;
+		target.style.paddingBottom = 0;
+		target.style.marginTop = 0;
+		target.style.marginBottom = 0;
+		window.setTimeout(() => {
+			target.hidden = true;
+			target.style.removeProperty('height');
+			target.style.removeProperty('padding-top');
+			target.style.removeProperty('padding-bottom');
+			target.style.removeProperty('margin-top');
+			target.style.removeProperty('margin-bottom');
+			target.style.removeProperty('overflow');
+			target.style.removeProperty('transition-duration');
+			target.style.removeProperty('transition-property');
+			target.classList.remove('_slide');
+		}, duration);
+	}
+}
+let _slideDown = (target, duration = 500) => {
+	if (!target.classList.contains('_slide')) {
+		target.classList.add('_slide');
+		if (target.hidden) {
+			target.hidden = false;
+		}
+		let height = target.offsetHeight;
+		target.style.overflow = 'hidden';
+		target.style.height = 0;
+		target.style.paddingTop = 0;
+		target.style.paddingBottom = 0;
+		target.style.marginTop = 0;
+		target.style.marginBottom = 0;
+		target.offsetHeight;
+		target.style.transitionProperty = "height, margin, padding";
+		target.style.transitionDuration = duration + 'ms';
+		target.style.height = height + 'px';
 		target.style.removeProperty('padding-top');
 		target.style.removeProperty('padding-bottom');
 		target.style.removeProperty('margin-top');
 		target.style.removeProperty('margin-bottom');
-		target.style.removeProperty('overflow');
-		target.style.removeProperty('transition-duration');
-		target.style.removeProperty('transition-property');
-		target.classList.remove('_slide');
-	}, duration);
-}
-let _slideDown = (target, duration = 500) => {
-	target.style.removeProperty('display');
-	let display = window.getComputedStyle(target).display;
-	if (display === 'none')
-		display = 'block';
-
-	target.style.display = display;
-	let height = target.offsetHeight;
-	target.style.overflow = 'hidden';
-	target.style.height = 0;
-	target.style.paddingTop = 0;
-	target.style.paddingBottom = 0;
-	target.style.marginTop = 0;
-	target.style.marginBottom = 0;
-	target.offsetHeight;
-	target.style.transitionProperty = "height, margin, padding";
-	target.style.transitionDuration = duration + 'ms';
-	target.style.height = height + 'px';
-	target.style.removeProperty('padding-top');
-	target.style.removeProperty('padding-bottom');
-	target.style.removeProperty('margin-top');
-	target.style.removeProperty('margin-bottom');
-	window.setTimeout(() => {
-		target.style.removeProperty('height');
-		target.style.removeProperty('overflow');
-		target.style.removeProperty('transition-duration');
-		target.style.removeProperty('transition-property');
-		target.classList.remove('_slide');
-	}, duration);
+		window.setTimeout(() => {
+			target.style.removeProperty('height');
+			target.style.removeProperty('overflow');
+			target.style.removeProperty('transition-duration');
+			target.style.removeProperty('transition-property');
+			target.classList.remove('_slide');
+		}, duration);
+	}
 }
 let _slideToggle = (target, duration = 500) => {
-	if (!target.classList.contains('_slide')) {
-		target.classList.add('_slide');
-		if (window.getComputedStyle(target).display === 'none') {
-			return _slideDown(target, duration);
-		} else {
-			return _slideUp(target, duration);
-		}
+	if (target.hidden) {
+		return _slideDown(target, duration);
+	} else {
+		return _slideUp(target, duration);
 	}
 }
 //========================================
@@ -736,6 +861,173 @@ function _removeClasses(el, class_name) {
 //IsHidden
 function _is_hidden(el) {
 	return (el.offsetParent === null)
+}
+// ShowMore Beta ========================
+let moreBlocks = document.querySelectorAll('._more-block');
+if (moreBlocks.length > 0) {
+	let wrapper = document.querySelector('.wrapper');
+	for (let index = 0; index < moreBlocks.length; index++) {
+		const moreBlock = moreBlocks[index];
+		let items = moreBlock.querySelectorAll('._more-item');
+		if (items.length > 0) {
+			let itemsMore = moreBlock.querySelector('._more-link');
+			let itemsContent = moreBlock.querySelector('._more-content');
+			let itemsView = itemsContent.getAttribute('data-view');
+			if (getComputedStyle(itemsContent).getPropertyValue("transition-duration") === '0s') {
+				itemsContent.style.cssText = "transition-duration: 1ms";
+			}
+			itemsMore.addEventListener("click", function (e) {
+				if (itemsMore.classList.contains('_active')) {
+					setSize();
+				} else {
+					setSize('start');
+				}
+				itemsMore.classList.toggle('_active');
+				e.preventDefault();
+			});
+
+			let isScrollStart;
+			function setSize(type) {
+				let resultHeight;
+				let itemsContentHeight = 0;
+				let itemsContentStartHeight = 0;
+
+				for (let index = 0; index < items.length; index++) {
+					if (index < itemsView) {
+						itemsContentHeight += items[index].offsetHeight;
+					}
+					itemsContentStartHeight += items[index].offsetHeight;
+				}
+				resultHeight = (type === 'start') ? itemsContentStartHeight : itemsContentHeight;
+				isScrollStart = window.innerWidth - wrapper.offsetWidth;
+				itemsContent.style.height = `${resultHeight}px`;
+			}
+
+			itemsContent.addEventListener("transitionend", updateSize, false);
+
+			function updateSize() {
+				let isScrollEnd = window.innerWidth - wrapper.offsetWidth;
+				if (isScrollStart === 0 && isScrollEnd > 0 || isScrollStart > 0 && isScrollEnd === 0) {
+					if (itemsMore.classList.contains('_active')) {
+						setSize('start');
+					} else {
+						setSize();
+					}
+				}
+			}
+			window.addEventListener("resize", function (e) {
+				if (!itemsMore.classList.contains('_active')) {
+					setSize();
+				} else {
+					setSize('start');
+				}
+			});
+			setSize();
+		}
+	}
+}
+//==RATING======================================
+const ratings = document.querySelectorAll('.rating');
+if (ratings.length > 0) {
+	initRatings();
+}
+// Основная функция
+function initRatings() {
+	let ratingActive, ratingValue;
+	// "Бегаем" по всем рейтингам на странице
+	for (let index = 0; index < ratings.length; index++) {
+		const rating = ratings[index];
+		initRating(rating);
+	}
+
+	// Инициализируем конкретный рейтинг
+	function initRating(rating) {
+		initRatingVars(rating);
+
+		setRatingActiveWidth();
+
+		if (rating.classList.contains('rating_set')) {
+			setRating(rating);
+		}
+	}
+
+	// Инициализайция переменных
+	function initRatingVars(rating) {
+		ratingActive = rating.querySelector('.rating__active');
+		ratingValue = rating.querySelector('.rating__value');
+	}
+	// Изменяем ширину активных звезд
+	function setRatingActiveWidth(index = ratingValue.innerHTML) {
+		const ratingActiveWidth = index / 0.05;
+		ratingActive.style.width = `${ratingActiveWidth}%`;
+	}
+	// Возможность указать оценку 
+	function setRating(rating) {
+		const ratingItems = rating.querySelectorAll('.rating__item');
+		for (let index = 0; index < ratingItems.length; index++) {
+			const ratingItem = ratingItems[index];
+			ratingItem.addEventListener("mouseenter", function (e) {
+				// Обновление переменных
+				initRatingVars(rating);
+				// Обновление активных звезд
+				setRatingActiveWidth(ratingItem.value);
+			});
+			ratingItem.addEventListener("mouseleave", function (e) {
+				// Обновление активных звезд
+				setRatingActiveWidth();
+			});
+			ratingItem.addEventListener("click", function (e) {
+				// Обновление переменных
+				initRatingVars(rating);
+
+				if (rating.dataset.ajax) {
+					// "Отправить" на сервер
+					setRatingValue(ratingItem.value, rating);
+				} else {
+					// Отобразить указанную оцнку
+					ratingValue.innerHTML = index + 1;
+					setRatingActiveWidth();
+				}
+			});
+		}
+	}
+
+	async function setRatingValue(value, rating) {
+		if (!rating.classList.contains('rating_sending')) {
+			rating.classList.add('rating_sending');
+
+			// Отправика данных (value) на сервер
+			let response = await fetch('rating.json', {
+				method: 'GET',
+
+				//body: JSON.stringify({
+				//	userRating: value
+				//}),
+				//headers: {
+				//	'content-type': 'application/json'
+				//}
+
+			});
+			if (response.ok) {
+				const result = await response.json();
+
+				// Получаем новый рейтинг
+				const newRating = result.newRating;
+
+				// Вывод нового среднего результата
+				ratingValue.innerHTML = newRating;
+
+				// Обновление активных звезд
+				setRatingActiveWidth();
+
+				rating.classList.remove('rating_sending');
+			} else {
+				alert("Ошибка");
+
+				rating.classList.remove('rating_sending');
+			}
+		}
+	}
 }
 //========================================
 //Animate
@@ -1167,13 +1459,19 @@ async function form_submit(e) {
 				let result = await response.json();
 				form.classList.remove('_sending');
 				if (message) {
-					popup_open('_' + message + '-message');
+					popup_open(message + '-message');
 				}
 				form_clean(form);
 			} else {
 				alert("Ошибка");
 				form.classList.remove('_sending');
 			}
+		}
+		// If test
+		if (form.hasAttribute('data-test')) {
+			e.preventDefault();
+			popup_open(message + '-message');
+			form_clean(form);
 		}
 	} else {
 		let form_error = form.querySelectorAll('._error');
@@ -1285,7 +1583,6 @@ for (let index = 0; index < viewPass.length; index++) {
 	});
 }
 
-
 //Select
 let selects = document.getElementsByTagName('select');
 if (selects.length > 0) {
@@ -1308,7 +1605,7 @@ function selects_init() {
 }
 function selects_close(e) {
 	const selects = document.querySelectorAll('.select');
-	if (!e.target.closest('.select')) {
+	if (!e.target.closest('.select') && !e.target.classList.contains('_option')) {
 		for (let index = 0; index < selects.length; index++) {
 			const select = selects[index];
 			const select_body_options = select.querySelector('.select__options');
@@ -1352,32 +1649,53 @@ function select_item(select) {
 	select_parent.insertAdjacentHTML('beforeend',
 		'<div class="select__item">' +
 		'<div class="select__title">' + select_type_content + '</div>' +
-		'<div class="select__options">' + select_get_options(select_options) + '</div>' +
+		'<div hidden class="select__options">' + select_get_options(select_options) + '</div>' +
 		'</div></div>');
 
 	select_actions(select, select_parent);
 }
 function select_actions(original, select) {
 	const select_item = select.querySelector('.select__item');
+	const selectTitle = select.querySelector('.select__title');
 	const select_body_options = select.querySelector('.select__options');
 	const select_options = select.querySelectorAll('.select__option');
 	const select_type = original.getAttribute('data-type');
 	const select_input = select.querySelector('.select__input');
 
-	select_item.addEventListener('click', function () {
-		let selects = document.querySelectorAll('.select');
-		for (let index = 0; index < selects.length; index++) {
-			const select = selects[index];
-			const select_body_options = select.querySelector('.select__options');
-			if (select != select_item.closest('.select')) {
-				select.classList.remove('_active');
-				_slideUp(select_body_options, 100);
-			}
-		}
-		_slideToggle(select_body_options, 100);
-		select.classList.toggle('_active');
+	selectTitle.addEventListener('click', function (e) {
+		selectItemActions();
 	});
 
+	function selectMultiItems() {
+		let selectedOptions = select.querySelectorAll('.select__option');
+		let originalOptions = original.querySelectorAll('option');
+		let selectedOptionsText = [];
+		for (let index = 0; index < selectedOptions.length; index++) {
+			const selectedOption = selectedOptions[index];
+			originalOptions[index].removeAttribute('selected');
+			if (selectedOption.classList.contains('_selected')) {
+				const selectOptionText = selectedOption.innerHTML;
+				selectedOptionsText.push(selectOptionText);
+				originalOptions[index].setAttribute('selected', 'selected');
+			}
+		}
+		select.querySelector('.select__value').innerHTML = '<span>' + selectedOptionsText + '</span>';
+	}
+	function selectItemActions(type) {
+		if (!type) {
+			let selects = document.querySelectorAll('.select');
+			for (let index = 0; index < selects.length; index++) {
+				const select = selects[index];
+				const select_body_options = select.querySelector('.select__options');
+				if (select != select_item.closest('.select')) {
+					select.classList.remove('_active');
+					_slideUp(select_body_options, 100);
+				}
+			}
+			_slideToggle(select_body_options, 100);
+			select.classList.toggle('_active');
+		}
+	}
 	for (let index = 0; index < select_options.length; index++) {
 		const select_option = select_options[index];
 		const select_option_value = select_option.getAttribute('data-value');
@@ -1386,7 +1704,7 @@ function select_actions(original, select) {
 		if (select_type == 'input') {
 			select_input.addEventListener('keyup', select_search);
 		} else {
-			if (select_option.getAttribute('data-value') == original.value) {
+			if (select_option.getAttribute('data-value') == original.value && !original.hasAttribute('multiple')) {
 				select_option.style.display = 'none';
 			}
 		}
@@ -1399,10 +1717,20 @@ function select_actions(original, select) {
 				select_input.value = select_option_text;
 				original.value = select_option_value;
 			} else {
-				select.querySelector('.select__value').innerHTML = '<span>' + select_option_text + '</span>';
-				original.value = select_option_value;
-				select_option.style.display = 'none';
+				if (original.hasAttribute('multiple')) {
+					select_option.classList.toggle('_selected');
+					selectMultiItems();
+				} else {
+					select.querySelector('.select__value').innerHTML = '<span>' + select_option_text + '</span>';
+					original.value = select_option_value;
+					select_option.style.display = 'none';
+				}
 			}
+			let type;
+			if (original.hasAttribute('multiple')) {
+				type = 'multiple';
+			}
+			selectItemActions(type);
 		});
 	}
 }
@@ -1413,7 +1741,7 @@ function select_get_options(select_options) {
 			const select_option = select_options[index];
 			const select_option_value = select_option.value;
 			if (select_option_value != '') {
-				const select_option_text = select_option.text;
+				const select_option_text = select_option.innerHTML;
 				select_options_content = select_options_content + '<div data-value="' + select_option_value + '" class="select__option">' + select_option_text + '</div>';
 			}
 		}
@@ -1463,7 +1791,7 @@ function inputs_init(inputs) {
 					input_focus_add(input);
 					input.value = '';
 				}
-				if (input.getAttribute('data-type') === "pass") {
+				if (input.getAttribute('data-type') === "pass" && !input.parentElement.querySelector('.form__viewpass').classList.contains('_active')) {
 					input.setAttribute('type', 'password');
 				}
 				if (input.classList.contains('_date')) {
@@ -1519,9 +1847,12 @@ function inputs_init(inputs) {
 				}
 			});
 			if (input.classList.contains('_date')) {
-				datepicker(input, {
-					customDays: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+				const calendarItem = datepicker(input, {
+					customDays: ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"],
 					customMonths: ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"],
+					overlayButton: 'Применить',
+					overlayPlaceholder: 'Год (4 цифры)',
+					startDay: 1,
 					formatter: (input, date, instance) => {
 						const value = date.toLocaleDateString()
 						input.value = value
@@ -1530,6 +1861,14 @@ function inputs_init(inputs) {
 						input_focus_add(input.el);
 					}
 				});
+				const dataFrom = input.getAttribute('data-from');
+				const dataTo = input.getAttribute('data-to');
+				if (dataFrom) {
+					calendarItem.setMin(new Date(dataFrom));
+				}
+				if (dataTo) {
+					calendarItem.setMax(new Date(dataTo));
+				}
 			}
 		}
 	}
@@ -1575,22 +1914,28 @@ if (quantityButtons.length > 0) {
 }
 
 //RANGE
-const priceSlider = document.querySelector('.price__range');
+const priceSlider = document.querySelector('.price-filter__slider');
 if (priceSlider) {
+
+	let textFrom = priceSlider.getAttribute('data-from');
+	let textTo = priceSlider.getAttribute('data-to');
+
 	noUiSlider.create(priceSlider, {
 		start: [0, 200000],
 		connect: true,
-		tooltips: [wNumb({ decimals: 0 }), wNumb({ decimals: 0 })],
+		tooltips: [wNumb({ decimals: 0, prefix: textFrom + ' ' }), wNumb({ decimals: 0, prefix: textTo + ' ' })],
 		range: {
 			'min': [0],
 			'max': [200000]
 		}
 	});
 
+	/*
 	const priceStart = document.getElementById('price-start');
 	const priceEnd = document.getElementById('price-end');
 	priceStart.addEventListener('change', setPriceValues);
 	priceEnd.addEventListener('change', setPriceValues);
+	*/
 
 	function setPriceValues() {
 		let priceStartValue;
