@@ -222,7 +222,6 @@ if (sliderScrollItems.length > 0) {
 	}
 }
 
-
 function sliders_bild_callback(params) { }
 
 if (document.querySelector('.slider-main__body')) {
