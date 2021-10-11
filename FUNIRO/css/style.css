@@ -2428,22 +2428,22 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
 }
 
 .cart-header__body {
-  background: #f4f5f7;
-  border: 1px solid #e0e0e0;
+  width: 300px;
   position: absolute;
   top: 60px;
   right: 0;
-  padding: 15px;
-  width: 300px;
-  z-index: 5;
   opacity: 0;
   visibility: hidden;
+  background: #f4f5f7;
+  border: 1px solid #e0e0e0;
   -webkit-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
   -webkit-transform: translate(0px, 20px);
       -ms-transform: translate(0px, 20px);
           transform: translate(0px, 20px);
+  padding: 15px;
+  z-index: 5;
 }
 
 ._active .cart-header__body {
@@ -2498,7 +2498,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
 }
 
 .cart-list__delete {
-  color: red;
+  color: #ff0000;
   font-size: 14px;
 }
 
