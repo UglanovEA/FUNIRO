@@ -1,0 +1,62 @@
+@use "sass:math";
+
+@import "mixins";
+@import "fonts";
+@import "icons";
+
+$fontFamily: "Gilroy";
+$fontSize: 16;
+
+$minWidth: 320px;
+$maxWidth: 1440;
+$maxWidthContainer: 1270;
+$md1: $maxWidthContainer + 12;
+$md2: 991.98;
+$md3: 767.98;
+$md4: 479.98;
+
+$mainColor: #3a3a3a;
+$orangeColor: #e89f71;
+$grayColor: #898989;
+$darkGrayColor: #616161;
+
+@import "null";
+
+body {
+	color: $mainColor;
+	&._lock {
+		overflow: hidden;
+	}
+}
+.wrapper {
+	width: 100%;
+	min-height: 100%;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+}
+._container {
+	max-width: $maxWidthContainer + px;
+	padding: 0px 15px;
+	margin: 0 auto;
+}
+@import "forms";
+@import "repeatElems";
+
+@import "lightgallery";
+@import "popup";
+
+@import "header";
+@import "slider";
+@import "advantages";
+@import "products";
+@import "rooms";
+@import "tips";
+@import "furniture";
+@import "footer";
+
+//<ОСНОВНОЙ БЛОК>====================================================================================================
+.page {
+	flex: 1 1 auto;
+}
+//</ОСНОВНОЙ БЛОК>====================================================================================================

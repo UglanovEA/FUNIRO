@@ -1,0 +1,164 @@
+.rooms {
+	background: #fcf8f3;
+	@include adaptiv-value("padding-top", 44, 30, 1);
+	@include adaptiv-value("padding-bottom", 44, 30, 1);
+	&__container {
+		@media (min-width: $md2+px) {
+			display: flex;
+		}
+	}
+	&__body {
+		position: relative;
+		flex: 0 0 math.div(465, 1240) * 100%;
+		align-self: center;
+		z-index: 5;
+		@media (min-width: $md2+px) {
+			@include adaptiv-value("padding-right", 80, 30, 1);
+		}
+		@media (max-width: $md2+px) {
+			margin: 0px 0px 30px 0px;
+		}
+	}
+	&__title {
+		&:not(:last-child) {
+			margin: 0px 0px math.div(8px, 40px) * 1em 0px;
+		}
+		text-align: left;
+	}
+	&__text {
+		line-height: 150%;
+		font-weight: 500;
+		&:not(:last-child) {
+			margin: 0px 0px 24px 0px;
+		}
+	}
+	&__button {
+		min-width: 180px;
+		background: $orangeColor;
+		color: #ffffff;
+		@media (any-hover: hover) {
+			&:hover {
+				background-color: #8d6146;
+			}
+		}
+	}
+	&__slider {
+		flex: 1 1 auto;
+		min-width: 0;
+		align-self: flex-start;
+		@media (max-width: $md4+px) {
+			margin: 0px -15px;
+		}
+	}
+}
+.slider-rooms {
+	position: relative;
+	&__body {
+		position: relative;
+		overflow: visible;
+		&::before {
+			content: "";
+			height: 100%;
+			width: 100vw;
+			position: absolute;
+			top: 0;
+			left: 0;
+			background-color: #fcf8f3;
+			transform: translate(-100%, 0px);
+			z-index: 2;
+		}
+	}
+	&__slide {
+		width: 372px;
+		position: relative;
+		overflow: hidden;
+		@include adaptiv-value("min-height", 585, 400, 1);
+		&.swiper-slide-active {
+			.slider-rooms__image {
+				height: 100%;
+			}
+		}
+		@media (max-width: $md4+px) {
+			width: 100%;
+		}
+	}
+	&__image {
+		height: 100%;
+		transition: height 0.8s ease 0s;
+		@media (min-width: $md3+px) {
+			height: 83%;
+		}
+	}
+	&__content {
+		max-width: 240px;
+		position: absolute;
+		color: inherit;
+		@include adaptiv-value("left", 24, 15, 1);
+		@include adaptiv-value("bottom", 24, 15, 1);
+		@include adaptiv-value("padding", 32, 15, 1);
+		background: rgba(255, 255, 255, 0.9);
+		/* Если браузер поддерживает backdrop-filter */
+		@supports ((-webkit-backdrop-filter: blur(31px)) or (backdrop-filter: blur(31px))) {
+			background: rgba(255, 255, 255, 0.72);
+			backdrop-filter: blur(31px);
+		}
+		&::before {
+			width: 48px;
+			height: 48px;
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			color: #ffffff;
+			background-color: $orangeColor;
+			transform: translate(100%, 0px);
+		}
+	}
+	&__title {
+		font-weight: 600;
+		@include adaptiv-value("font-size", 28, 24, 1);
+	}
+	&__arrows {
+		width: calc(100% - 48px);
+		position: absolute;
+		top: 50%;
+		left: 24px;
+		justify-content: space-between;
+		pointer-events: none;
+		transform: translate(0px, -50%);
+		z-index: 5;
+		@media (min-width: $md1+px) {
+			width: calc(100% + 48px);
+			left: -24px;
+		}
+	}
+	&__dotts {
+		@media (min-width: $md3+px) {
+			width: 100%;
+			position: absolute;
+			bottom: 30px;
+			left: 396px;
+		}
+		@media (max-width: $md3+px) {
+			justify-content: center;
+			padding: 15px 0px 0px 0px;
+		}
+	}
+}
+.label-slider {
+	display: grid;
+	color: $darkGrayColor;
+	gap: 8px;
+	align-items: center;
+	justify-content: start;
+	grid-template-columns: auto 27px auto;
+	&:not(:last-child) {
+		margin: 0px 0px 8px 0px;
+	}
+	&__line {
+		height: 1px;
+		background-color: $darkGrayColor;
+	}
+}
