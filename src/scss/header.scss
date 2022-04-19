@@ -402,13 +402,13 @@
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
-		padding: 0 0 0 rem(10);
+		padding-left: rem(10);
 	}
 	&__title {
 		color: inherit;
 		font-weight: 600;
 		transition: color 0.3s ease 0s;
-		margin: 0 0 math.div(5px, 16px) * 1em 0px;
+		margin-bottom: em(5, 16);
 		@media (any-hover: hover) {
 			&:hover {
 				color: $orangeColor;
@@ -417,7 +417,7 @@
 	}
 	&__quantity {
 		font-size: rem(14);
-		margin: 0 0 math.div(5px, 14px) * 1em 0px;
+		margin-bottom: em(5, 14);
 	}
 	&__delete {
 		color: #ff0000;
@@ -432,7 +432,7 @@
 		display: flex;
 		align-items: flex-start;
 		&:not(:last-child) {
-			margin: 0 0 rem(15) 0;
+			margin-bottom: rem(15);
 		}
 	}
 }

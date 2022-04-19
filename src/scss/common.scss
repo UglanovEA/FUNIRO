@@ -23,6 +23,19 @@
 		}
 	}
 }
+._title {
+	@include adaptiveValue("font-size", 40, 24);
+	font-weight: 700;
+	line-height: 1.2;
+	text-align: center;
+}
+/*летящая в корзину картинка*/
+._flyImage.-ibg {
+	position: fixed;
+	opacity: 1;
+	transition: all 1s ease 0s;
+	z-index: 100;
+}
 
 // ============Slider - Arrows============
 .slider-arrows {
