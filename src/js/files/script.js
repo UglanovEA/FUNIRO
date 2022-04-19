@@ -30,7 +30,7 @@ window.onload = function () {
 			addToCart(targetElement, productId);
 			e.preventDefault();
 		}
-		//Просмотр товаров в корзине по клику
+		// Просмотр товаров в корзине по клику
 		if (targetElement.classList.contains("cart-header__icon") || targetElement.closest(".cart-header__icon")) {
 			if (document.querySelector(".cart-list").children.length > 0) {
 				document.querySelector(".cart-header").classList.toggle("_active");
@@ -39,7 +39,7 @@ window.onload = function () {
 		} else if (!targetElement.closest(".cart-header") && !targetElement.classList.contains("actions-product__button")) {
 			document.querySelector(".cart-header").classList.remove("_active");
 		}
-
+		// Удаление товаров в корзине по клику
 		if (targetElement.classList.contains("cart-list__delete")) {
 			const productId = targetElement.closest(".cart-list__item").dataset.cartPid;
 			updateCart(targetElement, productId, false);
