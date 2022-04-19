@@ -1,8 +1,2 @@
-.DS_Store
-Thumbs.db
-node_modules/
-.git
-.vscode
-*.log*
-package-lock.json
-.prettierrc
+node_modules
+src2
