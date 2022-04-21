@@ -1,5 +1,7 @@
 // Подключение функционала "Чертогов Фрилансера"
 import { isMobile, removeClasses } from "./functions.js";
+
+import { ScrollReveal } from "./../libs/scrollreveal.min.js";
 // Подключение списка активных модулей
 import { flsModules } from "./modules.js";
 
@@ -207,4 +209,24 @@ window.onload = function () {
 			}
 		});
 	}
+
+	// ScrollReveal
+	const sr = ScrollReveal({
+		origin: "top",
+		distance: "60px",
+		duration: 1500,
+		delay: 100,
+		mobile: false,
+		// reset: true
+	});
+
+	sr.reveal(`.header__logo, .footer__main, .furniture__label, .tips__title, .products__title`);
+	sr.reveal(`.rooms__body, .main-slider__content`, { origin: "left" });
+
+	sr.reveal(`.furniture__title`, { delay: 200 });
+	sr.reveal(`.header__menu, .menu-footer__column, .products__item, .advantages__item`, { delay: 200, interval: 100 });
+	sr.reveal(`.header__search`, { delay: 300 });
+	sr.reveal(`.actions-header__item_favorites, .footer__subscribe`, { delay: 400 });
+	sr.reveal(`.cart-header__icon`, { delay: 500 });
+	sr.reveal(`.actions-header__item_user`, { delay: 600 });
 };

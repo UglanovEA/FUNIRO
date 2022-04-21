@@ -166,7 +166,7 @@
 		font-weight: 600;
 		line-height: 1.2;
 		&:not(:last-child) {
-			margin: em(4, 28);
+			margin-bottom: em(4, 28);
 		}
 	}
 	// .slider-main__text
@@ -174,7 +174,7 @@
 		color: $grayColor;
 		line-height: 1.5;
 		&:not(:last-child) {
-			margin: em(8, 16);
+			margin-bottom: em(8, 16);
 		}
 	}
 	// .slider-main__price

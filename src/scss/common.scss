@@ -29,15 +29,14 @@
 	line-height: 1.2;
 	text-align: center;
 }
-/*летящая в корзину картинка*/
+/*-----  летящая в корзину картинка  -----*/
 ._flyImage.-ibg {
 	position: fixed;
 	opacity: 1;
 	transition: all 1s ease 0s;
 	z-index: 100;
 }
-
-// ============Slider - Arrows============
+/*------------ Slider-Arrows ------------*/
 .slider-arrows {
 	display: grid;
 	grid-template-columns: repeat(2, rem(48));
@@ -79,7 +78,7 @@
 		}
 	}
 }
-// ============Slider - Dots============
+/*------------ Slider-Dots ------------*/
 .swiper-pagination-bullets {
 	display: flex;
 	flex-wrap: wrap;
@@ -124,4 +123,16 @@
 	&::before {
 		transform: scale(1);
 	}
+}
+/*------------ SCROLL BAR ------------*/
+::-webkit-scrollbar {
+	width: 0.7rem;
+	background-color: #c4c3c3;
+}
+::-webkit-scrollbar-thumb {
+	background-color: $orangeColor;
+	border-radius: 1rem;
+}
+::-webkit-scrollbar-thumb:hover {
+	background-color: #be7649;
 }
