@@ -263,6 +263,8 @@
 	@include adaptiveValue("padding-bottom", 44, 30);
 	// .products__container
 	&__container {
+		display: flex;
+		flex-direction: column;
 	}
 	// .products__title
 	&__title {
@@ -281,13 +283,16 @@
 	}
 	// .products__footer
 	&__footer {
+		display: inline-flex;
 		padding-top: rem(32);
 		text-align: center;
+		justify-content: center;
 	}
 	// .products__more
 	&__more {
 		border: 1px solid $orangeColor;
 		min-width: rem(245);
+
 		&._hold {
 			opacity: 0.4;
 			cursor: default;
